@@ -1,19 +1,19 @@
 FROM rocker/ropensci:latest
 
-RUN rm -vfr /var/lib/apt/lists/*
+#RUN rm -vfr /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get -y upgrade && apt-get install -y \
-	texlive-generic-recommended texlive-xetex \
-	libmpfr-dev \
-	cimg-dev \
-	libhdf4-dev hdf4-tools \
-	libnetcdf-dev netcdf-bin \
-	proj-bin libproj-dev gdal-bin \
-	libgdal-dev \
-    libnlopt-dev
+#RUN apt-get update && apt-get -y upgrade && apt-get install -y \
+#	texlive-generic-recommended texlive-xetex \
+#	libmpfr-dev \
+#	cimg-dev \
+#	libhdf4-dev hdf4-tools \
+#	libnetcdf-dev netcdf-bin \
+#	proj-bin libproj-dev gdal-bin \
+#	libgdal-dev \
+#    libnlopt-dev
 
 # for knitting pdfs etc with Tufte styles
-RUN kpsewhich -var-value TEXMFLOCAL
+#RUN kpsewhich -var-value TEXMFLOCAL
 
 # explicitly install R pkg deps for HieRanFor and UpScaling
 # since the --deps TRUE option doesn't seem to work below (?)
