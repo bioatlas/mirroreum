@@ -3,6 +3,8 @@ FROM rocker/ropensci:3.4.1
 RUN rm -vfr /var/lib/apt/lists/*
 
 COPY ./sources.list /etc/apt/sources.list
+COPY ./installGithub.r /usr/local/lib/R/site-library/littler/examples/installGithub.r
+COPY ./installGithub.r /usr/local/bin/installGithub.r
 
 RUN apt-get update && apt-get install -y \
 	proj-bin \
