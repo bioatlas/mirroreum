@@ -1,23 +1,16 @@
-FROM rocker/ropensci:latest
+FROM rocker/ropensci:3.4.1
 
-#RUN rm -vfr /var/lib/apt/lists/*
+RUN rm -vfr /var/lib/apt/lists/*
 
-#RUN apt-get update && apt-get -y upgrade && apt-get install -y \
-#	texlive-generic-recommended texlive-xetex \
-#	libmpfr-dev \
-#	cimg-dev \
-#	libhdf4-dev hdf4-tools \
-#	libnetcdf-dev netcdf-bin \
-#	proj-bin libproj-dev gdal-bin \
-#	libgdal-dev \
-#    libnlopt-dev
+COPY ./sources.list /etc/apt/sources.list
 
-# for knitting pdfs etc with Tufte styles
-#RUN kpsewhich -var-value TEXMFLOCAL
-
-# explicitly install R pkg deps for HieRanFor and UpScaling
-# since the --deps TRUE option doesn't seem to work below (?)
-RUN install2.r --error \
+RUN apt-get update && apt-get install -y -no-install-recommends \
+	proj-bin \
+	gdal-bin \
+	libhdf4-dev \
+	netcdf-bin \
+	libnlopt-dev \
+&& install2.r --error \
 	sparklyr \
 	downscale \
 	getopt \
@@ -45,7 +38,9 @@ RUN install2.r --error \
 	spacetime \
 	plotKML \
 	pdfCluster \
-	move
+	move \
+	maxnet \
+	red
 
 # add packages for zoa
 RUN wget -P /tmp 'https://rawgit.com/positioning/kalmanfilter/master/downloads/R3x/64bit/linux/kftrack_0.70-x64.tar.gz' && \
@@ -54,32 +49,16 @@ RUN wget -P /tmp 'https://rawgit.com/positioning/kalmanfilter/master/downloads/R
 	Rscript -e "install.packages(c('date', 'ncdf'), repos='http://cran.csiro.au/')" && \
 	Rscript -e "install.packages('/tmp/ukfsst_0.3-x64.tar.gz', repos=NULL)"
 
-# add semi-packaged eubon R packages
-# RUN mkdir -p /tmp/eubon
-# WORKDIR /tmp/eubon
-# ADD ./*.R /tmp/eubon/
-# ADD ./*.zip /tmp/eubon/
-# RUN unzip HieRanFor*.zip
-# RUN unzip UpScaling*.zip
-
-# can RForge be used instead?
-# RUN cd /tmp/eubon && install2.r --deps TRUE --repos NULL --error \
-#	HieRanFor \
-#	UpScaling
-
 # add GitHub and Ecology packages
 RUN installGithub.r --deps TRUE \
-	raquamaps/raquamaps \
-	mskyttner/swedishbirdtrends \
-	mskyttner/swedishbirdrecoveries \
 	AtlasOfLivingAustralia/ALA4R \
 	azizka/sampbias \
 	azizka/speciesgeocodeR \
+	raquamaps/raquamaps \
+	mskyttner/swedishbirdtrends \
+	mskyttner/swedishbirdrecoveries \
 	fschirr/VirSysMon
 
 # clean up
 RUN rm -rf /tmp/*.rds && \
 	apt-get autoclean
-
-WORKDIR /home/rstudio
-EXPOSE 8787
