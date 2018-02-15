@@ -4,7 +4,7 @@ RUN rm -vfr /var/lib/apt/lists/*
 
 COPY ./sources.list /etc/apt/sources.list
 
-RUN apt-get update && apt-get install -y -no-install-recommends \
+RUN apt-get update && apt-get install -y \
 	proj-bin \
 	gdal-bin \
 	libhdf4-dev \
