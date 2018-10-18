@@ -98,17 +98,8 @@ RUN installGithub.r --deps TRUE \
 # install.packages(c("downscale", "split", "top", ), 
 #  repos="http://R-Forge.R-project.org", dependencies = TRUE)
 
-RUN apt-get update && apt-get install -y \
-	tesseract-ocr-swe
-
 RUN rm -rf /tmp/*.rds && \
 	apt-get autoclean && \
 	apt-get autoremove -y
-
-RUN pip install suds-jurko lxml && \
-	install2.r --error \
-	tabulizer \
-	magick \
-	tesseract
 
 # CMD ["/usr/bin/shiny-server.sh"]

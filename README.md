@@ -1,6 +1,6 @@
 # mirroreum
 
-The `mirroreum` is a stack for working with spatial data using R and RStudio Web which includes various assorted packages (for example from ROpenSci packages, Shiny etc etc). It extends the [rocker-org/ropensci](https://github.com/rocker-org/ropensci) image with additional packages (see the Dockerfile for details).
+The `mirroreum` is a stack for working with spatial data using R and the web-variant of the RStudio IDE. It comes with a pre-installed set of various assorted packages (for example from ROpenSci packages, Shiny etc etc). It extends the [rocker-org/ropensci](https://github.com/rocker-org/ropensci) image with additional packages (see the Dockerfile for details).
 
 For more documentation and usage instructions, please see the [wiki](https://github.com/rocker-org/rocker/wiki) and this [excellent tutorial](http://ropenscilabs.github.io/r-docker-tutorial/)
 
