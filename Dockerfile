@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
 	sparklyr \
 	downscale \
 	getopt \
+	xfun \
 	tufte \
 	tufterhandout \
 	ggmap \
