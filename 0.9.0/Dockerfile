@@ -48,8 +48,8 @@ RUN apt-get update && apt-get install -y \
 	red
 
 # add packages for zoa
-RUN wget -P /tmp 'https://rawgit.com/positioning/kalmanfilter/master/downloads/R3x/64bit/linux/kftrack_0.70-x64.tar.gz' && \
-	wget -P /tmp 'https://rawgit.com/positioning/kalmanfilter/master/downloads/R3x/64bit/linux/ukfsst_0.3-x64.tar.gz' && \
+RUN wget -P /tmp 'https://github.com/positioning/kalmanfilter/raw/master/downloads/R3x/64bit/linux/kftrack_0.70-x64.tar.gz' && \
+	wget -P /tmp 'https://github.com/positioning/kalmanfilter/raw/master/downloads/R3x/64bit/linux/ukfsst_0.3-x64.tar.gz' && \
 	Rscript -e "install.packages('/tmp/kftrack_0.70-x64.tar.gz', repos=NULL)" && \
 	Rscript -e "install.packages(c('date', 'ncdf'), repos='http://cran.csiro.au/')" && \
 	Rscript -e "install.packages('/tmp/ukfsst_0.3-x64.tar.gz', repos=NULL)"

@@ -1,12 +1,18 @@
 # mirroreum
 
-The `mirroreum` is a stack for working with spatial data using R and the web-variant of the RStudio IDE. It comes with a pre-installed set of various assorted packages (for example from ROpenSci packages, Shiny etc etc). It extends the [rocker-org/ropensci](https://github.com/rocker-org/ropensci) image with additional packages (see the Dockerfile for details).
+The `mirroreum` is an AGPL-licensed portable dockerized software stack supporting reproducible research efforts within biodiversity informatics. At the base is a Debian OS with system libraries for geospatial work pre-installed. On top of this comes various software to support working with R and Python and for using pandoc. It can be used entirely through the web browser and/or at the CLI and it can run locally or deployed at a server in the cloud.
+
+To support work using R, it provides a platform for working with spatial data using R and the web-variant of the RStudio IDE as well as a Shiny server. This means it comes with a pre-installed set of various assorted packages (for example from ROpenSci packages, Shiny etc etc). It extends the [rocker-org/ropensci](https://github.com/rocker-org/ropensci) image with additional packages (see the Dockerfile for details). Among the many pre-installed packages is ALA4R and livingatlases - R packages which provides access to data sources in the Living Atlases community. Various other packages are pre-installed to support for example ecological niche modelling work.
 
 For more documentation and usage instructions, please see the [wiki](https://github.com/rocker-org/rocker/wiki) and this [excellent tutorial](http://ropenscilabs.github.io/r-docker-tutorial/)
 
 ## Quickstart
 
-Link a local volume (in this example, the current working directory, `$(pwd)`) to the container:
+If you have an account at a server deployment such as https://mirroreum.bioatlas.se you could log in there to get started.
+
+If you are a developer or system adminsitrator, you might be interested in downloading and running `mirroreum` locally, which requires that you have Docker installed.
+
+Then, to start `mirroreum` locally, link a local volume (in this example, the current working directory, `$(pwd)`) to the container, start it and point your browser to it with these CLI commands:
 
 ```bash
 docker run -d --name mywebide \
@@ -22,7 +28,14 @@ firefox http://localhost:8787 &
 
 The first command will start the container in the background so you can visit `http://localhost:8787` with your web browser and log in with username:password as `rstudio:rstudio`.
 
-You can list the full set of included packages from the CLI with:
+You can also then run the CLI if you wish with:
+
+```bash
+docker exec -it mywebide bash
+
+```
+
+You can list the full set of included packages with:
 
 ```bash
 docker exec -it mywebide \
@@ -72,6 +85,6 @@ docker run -d --name myshinyapp \
 
 ```
 
-If you have an app in a subdirectory of your present working directory named appdir, you can now use a web browser to access the app by visiting http://localhost:3838/appdir/
+If you have a Shiny app in a subdirectory of your present working directory named appdir, you can now use a web browser to access the app by visiting http://localhost:3838/appdir/
 
 
