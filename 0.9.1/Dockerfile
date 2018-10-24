@@ -91,7 +91,15 @@ RUN rm /srv/shiny-server/index.html && \
 	ln -s /usr/local/lib/R/site-library/swedishbirdrecoveries/shiny-apps/birdrecoveries/* /srv/shiny-server
 
 # add more packages
-RUN installGithub.r --deps TRUE \
+# add more packages
+RUN install2.r --error \
+	reprex \
+	pool \
+	RPostgres \
+	rasterVis \
+	cowplot
+
+RUN installGithub.r --deps FALSE \
 	GBIF-Europe/darwinator \
 	raymondben/livingatlases \
 	rekonstrukt/swedishbutterflies
